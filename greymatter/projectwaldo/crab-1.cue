@@ -8,13 +8,13 @@ import (
 
 
 
-Crab: gsl.#Service & {
+Crab-1: gsl.#Service & {
 	// A context provides global information from globals.cue
 	// to your service definitions.
-	context: Crab.#NewContext & globals
+	context: Crab-1.#NewContext & globals
 
-	name:          "crab"
-	display_name:  "Crab"
+	name:          "crab-1"
+	display_name:  "Crab-1"
 	version:       "v1.0.0"
 	description:   "EDIT ME"
 	
@@ -24,9 +24,9 @@ Crab: gsl.#Service & {
 	owner: ""
 	capability: ""
 	
-	// Crab -> ingress to your container
+	// Crab-1 -> ingress to your container
 	ingress: {
-		"crab": {
+		"crab-1": {
 			gsl.#HTTPListener
 			
 			
@@ -50,14 +50,14 @@ Crab: gsl.#Service & {
 		}
 	}
 
-	// Edge config for the Crab service.
+	// Edge config for the Crab-1 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
 	edge: {
 		edge_name: "edge-projectwaldo"
 		edge_ingress: "edge-projectwaldo"
-		routes: "/services/projectwaldo/crab": upstreams: "\(name)": gsl.#DefaultUpstream
+		routes: "/services/projectwaldo/crab-1": upstreams: "\(name)": gsl.#DefaultUpstream
 	}
 }
 
-exports: "crab": Crab
+exports: "crab-1": Crab-1
