@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crab-1
+  name: crab1
   namespace: foobar-12
   annotations:
     greymatter.io/inject-sidecar-to: "9090"
 spec:
   selector:
     matchLabels:
-      app: crab-1
+      app: crab1
   replicas: 1
   template:
     metadata:
       labels:
-        app: crab-1
+        app: crab1
     spec:
       securityContext:
         sysctls:
           - name: net.ipv4.ip_local_port_range
             value: 12000 65000
       containers:
-        - name: crab-1
+        - name: crab1
           image: greymatter.jfrog.io/internal-oci/fake-service:v0.24.2
           env:
             - name: ERROR_RATE

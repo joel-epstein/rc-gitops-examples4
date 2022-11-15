@@ -25,7 +25,7 @@ spec:
           secretName: greymatter-sync-secret
       containers:
       - name: greymatter-sync
-        image: greymatter.jfrog.io/release-oci/greymatter-cli:4.5.2-ubi8.6-2022-11-15
+        image: greymatter.jfrog.io/release-oci/greymatter-cli:4.5.1-ubi8.6-2022-11-14 
         imagePullPolicy: Always
         command: ["/usr/local/bin/greymatter"]
         args: [
@@ -71,4 +71,4 @@ metadata:
   namespace: foobar-12
 data:
   # property-like keys; each key maps to a simple value
-  GREYMATTER_GIT_REMOTE: "git@github.com:joel-epstein/rc-gitops-examples4.git"
+  GREYMATTER_GIT_REMOTE: ""
