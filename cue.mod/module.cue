@@ -1,0 +1,1 @@
+module: "projectwaldo.module"
