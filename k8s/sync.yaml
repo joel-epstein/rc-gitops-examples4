@@ -24,8 +24,8 @@ spec:
         secret:
           secretName: greymatter-sync-secret
       containers:
-      - name: greymatter-sync
-        image: greymatter.jfrog.io/release-oci/greymatter-cli:4.5.1-ubi8.6-2022-11-14 
+      - name: greymatter-sync 
+        image: greymatter.jfrog.io/release-oci/greymatter-cli:4.5.2-ubi8.6-2022-11-15
         imagePullPolicy: Always
         command: ["/usr/local/bin/greymatter"]
         args: [
