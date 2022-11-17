@@ -16,7 +16,7 @@ Crab1: gsl.#Service & {
 	name:          "crab1"
 	display_name:  "Crab1"
 	version:       "v1.0.0"
-	description:   "GREENLIGHT"
+	description:   "REDLIGHT"
 	
 	api_endpoint:              "http://\(context.globals.edge_host)/services/projectwaldo/\(name)/"
 	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/projectwaldo/\(name)/"
