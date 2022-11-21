@@ -25,7 +25,9 @@ spec:
           secretName: greymatter-sync-secret
       containers:
       - name: greymatter-sync 
-        image: greymatter.jfrog.io/release-oci/greymatter-cli:4.5.2-ubi8.6-2022-11-15
+        # image: greymatter.jfrog.io/release-oci/greymatter-cli:4.5.2-ubi8.6-2022-11-15
+        # image: greymatter.jfrog.io/internal-oci/greymatter-cli:alec-test
+        image: greymatter.jfrog.io/dev-oci/cli:joel-pprof
         imagePullPolicy: Always
         command: ["/usr/local/bin/greymatter"]
         args: [
@@ -43,13 +45,6 @@ spec:
           "--redis-username", "",
           "--redis-db", "0"
         ]
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "512Mi"
-          requests:
-            cpu: "50m"
-            memory: "128Mi"
         volumeMounts:
         - name: ssh-private-key
           readOnly: true
