@@ -30,10 +30,10 @@ _namespace2fruit: {
 
 everything: list.Concat([
 	// _pod_security_policy,
-	(_sync_template & {_namespace: namespace}).objects,
-	(_manifests_template & {_namespace: namespace}).objects,
+	// (_sync_template & {_namespace: namespace}).objects,
+	// (_manifests_template & {_namespace: namespace}).objects,
 	all_fruit,
-	// [_vegeta_template & {_namespace: namespace}],
+	[_vegeta_template & {_namespace: namespace}],
 ])
 
 everything_yaml: yaml.MarshalStream(everything)
@@ -71,10 +71,10 @@ _fruit_template: {
 				containers: [{
 					name:  _name
 					image: "greymatter.jfrog.io/internal-oci/fake-service:v0.24.2"
-					env: [
-						{name: "ERROR_RATE", value: "0.1"},
-						{name: "ERROR_CODE", value: "501"},
-					]
+					// env: [
+					// 	{name: "ERROR_RATE", value: "0.1"},
+					// 	{name: "ERROR_CODE", value: "501"},
+					// ]
 				}]
 			}
 		}
@@ -129,11 +129,11 @@ _vegeta_template: {
 					name: "vegeta"
 					image: "greymatter.jfrog.io/internal-oci/vegeta:latest"
 					env: [
-						{name: "TARGET_FQDN", value: "edge-grocerylist\(_num).\(_namespace).svc.cluster.local:\(_port)"},
+						{name: "TARGET_FQDN", value: "edge-projectwaldo\(_num).\(_namespace).svc.cluster.local:\(_port)"},
 						{name: "TARGET_OBJECT", value: _namespace2fruit[_namespace]},
 						{name: "COUNT", value: "\(number)"},
 						{name: "RATE", value: "840"},
-						{name: "DURATION", value: "30m"},
+						{name: "DURATION", value: "0s"},
 						{name: "BLOCK", value: "false"},
 					]
 				}]
@@ -234,32 +234,33 @@ _sync_template: {
 			namespace: _namespace
 		}
 		data: {
-			GREYMATTER_GIT_REMOTE: "git@github.com:joel-epstein/rc-gitops-examples3.git"
+			GREYMATTER_GIT_REMOTE: "git@github.com:joel-epstein/rc-gitops-examples4.git"
 		}
 	}]
 }
 
 
 ////////////
-// edge-grocerylist.yaml
+// edge-projectwaldo.yaml
 
 
 _manifests_template: {
 	_namespace: string
-	_num: strings.Split(_namespace, "-")[1]
-	_port: 10808+strconv.Atoi(_num)
+	// _num: strings.Split(_namespace, "-")[1]
+	_num: ""
+	_port: 10808+1//strconv.Atoi(_num)
 	objects: [{
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		metadata: {
-			name:      "edge-grocerylist\(_num)"
+			name:      "edge-projectwaldo\(_num)"
 			namespace: _namespace
 		}
 		spec: {
 			replicas: 10
-			selector: matchLabels: "greymatter.io/cluster": "edge_grocerylist\(_num)"
+			selector: matchLabels: "greymatter.io/cluster": "edge_projectwaldo\(_num)"
 			template: {
-				metadata: labels: "greymatter.io/cluster": "edge_grocerylist\(_num)"
+				metadata: labels: "greymatter.io/cluster": "edge_projectwaldo\(_num)"
 				spec: {
 					securityContext: sysctls: [
 						{name: "net.ipv4.ip_local_port_range", value: "12000 65000"},
@@ -270,7 +271,7 @@ _manifests_template: {
 					]
 					containers: [{
 						name:            "sidecar"
-						image:           "greymatter.jfrog.io/release-oci/greymatter-proxy:1.7.5-ubi8.6-2022-11-09"
+						image:           "greymatter.jfrog.io/dev-oci/gm-proxy:1.8.0"
 						imagePullPolicy: "Always"
 						ports: [{
 							containerPort: _port
@@ -278,7 +279,7 @@ _manifests_template: {
 						}]
 						env: [{
 							name:  "XDS_CLUSTER"
-							value: "edge_grocerylist\(_num)"
+							value: "edge_projectwaldo\(_num)"
 						}, {
 							name:  "ENVOY_ADMIN_LOG_PATH"
 							value: "/dev/stdout"
@@ -306,7 +307,7 @@ _manifests_template: {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "edge-grocerylist\(_num)"
+			name:      "edge-projectwaldo\(_num)"
 			namespace: _namespace
 		}
 		spec: {
@@ -316,7 +317,7 @@ _manifests_template: {
 				protocol:   "TCP"
 				targetPort: _port
 			}]
-			selector: "greymatter.io/cluster": "edge_grocerylist\(_num)"
+			selector: "greymatter.io/cluster": "edge_projectwaldo\(_num)"
 			type: "LoadBalancer"
 		}
 	}]
