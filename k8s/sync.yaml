@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata: 
   name: greymatter-sync
-  namespace: foobar-12
+  namespace: foobar-1
 spec:
   selector:
     matchLabels:
@@ -24,10 +24,8 @@ spec:
         secret:
           secretName: greymatter-sync-secret
       containers:
-      - name: greymatter-sync 
-        # image: greymatter.jfrog.io/release-oci/greymatter-cli:4.5.2-ubi8.6-2022-11-15
-        # image: greymatter.jfrog.io/internal-oci/greymatter-cli:alec-test
-        image: greymatter.jfrog.io/dev-oci/cli:joel-pprof
+      - name: greymatter-sync
+        image: greymatter.jfrog.io/oci/greymatter-cli:4.5.2-ubi8.6-2022-11-15
         imagePullPolicy: Always
         command: ["/usr/local/bin/greymatter"]
         args: [
@@ -45,6 +43,13 @@ spec:
           "--redis-username", "",
           "--redis-db", "0"
         ]
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "512Mi"
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
         volumeMounts:
         - name: ssh-private-key
           readOnly: true
@@ -63,7 +68,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: greymatter-sync-config
-  namespace: foobar-12
+  namespace: foobar-1
 data:
   # property-like keys; each key maps to a simple value
   GREYMATTER_GIT_REMOTE: "git@github.com:joel-epstein/rc-gitops-examples4.git"
