@@ -1,8 +1,4 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: foobar-1
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,13 +35,13 @@ spec:
               value: controlensemble.greymatter.svc.cluster.local
             - name: XDS_PORT
               value: "50000"
-          resources:
-            limits:
-              cpu: 200m
-              memory: 200Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
+          # resources:
+          #   limits:
+          #     cpu: 200m
+          #     memory: 200Mi
+          #   requests:
+          #     cpu: 100m
+          #     memory: 128Mi
       imagePullSecrets:
       - name: gm-docker-secret
 ---
