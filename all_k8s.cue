@@ -33,7 +33,7 @@ everything: list.Concat([
 	// (_sync_template & {_namespace: namespace}).objects,
 	// (_manifests_template & {_namespace: namespace}).objects,
 	all_fruit,
-	[_vegeta_template & {_namespace: namespace}],
+	// [_vegeta_template & {_namespace: namespace}],
 ])
 
 everything_yaml: yaml.MarshalStream(everything)
