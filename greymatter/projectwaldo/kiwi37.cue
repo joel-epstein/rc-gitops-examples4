@@ -8,13 +8,13 @@ import (
 
 
 
-Kiwi1: gsl.#Service & {
+Kiwi37: gsl.#Service & {
 	// A context provides global information from globals.cue
 	// to your service definitions.
-	context: Kiwi1.#NewContext & globals
+	context: Kiwi37.#NewContext & globals
 
-	name:          "kiwi1"
-	display_name:  "Kiwi1"
+	name:          "kiwi37"
+	display_name:  "Kiwi37"
 	version:       "v1.0.0"
 	description:   "EDIT ME"
 	
@@ -24,9 +24,9 @@ Kiwi1: gsl.#Service & {
 	owner: ""
 	capability: ""
 	
-	// Kiwi1 -> ingress to your container
+	// Kiwi37 -> ingress to your container
 	ingress: {
-		"kiwi1": {
+		"kiwi37": {
 			gsl.#HTTPListener
 			
 			
@@ -50,14 +50,14 @@ Kiwi1: gsl.#Service & {
 		}
 	}
 
-	// Edge config for the Kiwi1 service.
+	// Edge config for the Kiwi37 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
 	edge: {
 		edge_name: "edge-projectwaldo"
 		edge_ingress: "edge-projectwaldo"
-		routes: "/services/projectwaldo/kiwi1": upstreams: "\(name)": gsl.#DefaultUpstream
+		routes: "/services/projectwaldo/kiwi37": upstreams: "\(name)": gsl.#DefaultUpstream
 	}
 }
 
-exports: "kiwi1": Kiwi1
+exports: "kiwi37": Kiwi37
