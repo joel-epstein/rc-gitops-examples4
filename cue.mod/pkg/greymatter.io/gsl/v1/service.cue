@@ -18,7 +18,7 @@ package v1
 	api_spec_endpoint:         string
 	description?:              string
 	enable_instance_metrics:   bool | *true
-	enable_historical_metrics: bool | *true
+	enable_historical_metrics: bool | *false
 	business_impact:           string | *"low"
 	version?:                  string
 	owner?:                    string

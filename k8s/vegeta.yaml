@@ -30,7 +30,7 @@ spec:
             - name: COUNT
               value: "2"
             - name: RATE
-              value: "200"
+              value: "5"
             - name: DURATION
               value: 0s
             - name: BLOCK

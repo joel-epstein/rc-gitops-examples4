@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: sidecar
-          image: greymatter.jfrog.io/dev-oci/gm-proxy:1.8.0
+          image: greymatter.jfrog.io/oci/greymatter-proxy:1.7.5-ubi8.6-2022-11-09
           imagePullPolicy: Always
           ports:
           - containerPort: 10809
@@ -35,13 +35,13 @@ spec:
               value: controlensemble.greymatter.svc.cluster.local
             - name: XDS_PORT
               value: "50000"
-          # resources:
-          #   limits:
-          #     cpu: 200m
-          #     memory: 200Mi
-          #   requests:
-          #     cpu: 100m
-          #     memory: 128Mi
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
       imagePullSecrets:
       - name: gm-docker-secret
 ---

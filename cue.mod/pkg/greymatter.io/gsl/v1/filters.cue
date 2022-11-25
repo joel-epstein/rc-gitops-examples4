@@ -73,7 +73,7 @@ _#extractSubset: {
 	envoy_ext_authz?:       envoy_ext_authz_tcp.#ExtAuthz
 	gm_jwtsecurity?:        network.#JwtSecurityTcpConfig
 	gm_logger?:             network.#TcpLoggerConfig
-	gm_metrics?:            network.#TcpMetricsConfig
+	gm_metrics?:            network.#MetricsConfig
 	envoy_mongo_proxy?:     envoy_mongo_proxy.#MongoProxy
 	gm_audit?:              network.#ObservablesTCPConfig
 	envoy_rate_limit?:      envoy_tcp_rate_limit.#RateLimit
@@ -643,7 +643,7 @@ _#lookupFilters: {
 			discovered_host: {
 				// Note: TLS should be configured on the cluster linking OPA with the service
 				service_name: string
-				authority?:   string // envoy defaults this to the cluster_name
+				authority:    string
 			}
 		} | {
 			static_host: {
@@ -651,7 +651,7 @@ _#lookupFilters: {
 				envoy.#GrpcService_GoogleGrpc
 			}
 		}
-		request_timeout?: string
+		request_timeout: string
 
 		failure_mode_allow: *false | _
 		//escape hatch

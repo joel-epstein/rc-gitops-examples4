@@ -6,7 +6,7 @@
 # they need to be grouped for the eval within EXPORTS.cue
 # kiwi peach orange fig grape
 
-for i in {1..100}
+for i in {1..2}
 do
 #echo "kiwi${i}"
 ~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "kiwi${i}"
