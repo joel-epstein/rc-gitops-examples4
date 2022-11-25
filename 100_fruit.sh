@@ -10,17 +10,17 @@ for i in {1..2}
 do
 #echo "kiwi${i}"
 ~/greymatter453 init service --insecure --type=http --dir greymatter/foobar_1 --port=9090 --namespace=foobar-1 "kiwi${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "peach${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "orange${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "fig${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "grape${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "melon${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "cranberry${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "star${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "tangerine${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "blueberry${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "salmon${i}"
-#~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "crab${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_2 --port=9090 --namespace=foobar-2 "peach${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_3 --port=9090 --namespace=foobar-3 "orange${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_4 --port=9090 --namespace=foobar-4 "fig${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_5 --port=9090 --namespace=foobar-5 "grape${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_6 --port=9090 --namespace=foobar-6 "melon${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_7 --port=9090 --namespace=foobar-7 "cranberry${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_8 --port=9090 --namespace=foobar-8 "star${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_9 --port=9090 --namespace=foobar-9 "tangerine${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_10 --port=9090 --namespace=foobar-10 "blueberry${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_11 --port=9090 --namespace=foobar-11 "salmon${i}"
+#~/greymatter init service --insecure --type=http --dir greymatter/foobar_12 --port=9090 --namespace=foobar-12 "crab${i}"
 
 
 
