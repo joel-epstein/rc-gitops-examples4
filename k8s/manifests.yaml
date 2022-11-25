@@ -1,19 +1,17 @@
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: edge-projectwaldo
-  namespace: foobar-1
+  name: edge-foobar-2
+  namespace: foobar-2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      greymatter.io/cluster: edge-projectwaldo
+      greymatter.io/cluster: edge-foobar-2
   template:
     metadata:
       labels:
-        greymatter.io/cluster: edge-projectwaldo
+        greymatter.io/cluster: edge-foobar-2
     spec:
       containers:
         - name: sidecar
@@ -24,7 +22,7 @@ spec:
             name: proxy
           env:
             - name: XDS_CLUSTER
-              value: edge-projectwaldo
+              value: edge-foobar-2
             - name: ENVOY_ADMIN_LOG_PATH
               value: /dev/stdout
             - name: PROXY_DYNAMIC
@@ -48,8 +46,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: edge-projectwaldo
-  namespace: foobar-1
+  name: edge-foobar-2
+  namespace: foobar-2
 spec:
   ports:
   - name: ingress
@@ -57,6 +55,6 @@ spec:
     protocol: TCP
     targetPort: 10809
   selector:
-    greymatter.io/cluster: edge-projectwaldo
+    greymatter.io/cluster: edge-foobar-2
   type: LoadBalancer
 

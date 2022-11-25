@@ -1,1 +1,1 @@
-module: "projectwaldo.module"
+module: "foobar_2.module"
