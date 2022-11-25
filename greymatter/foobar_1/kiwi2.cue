@@ -1,11 +1,10 @@
-package projectwaldo
+package foobar_1
 
 import (
 	gsl "greymatter.io/gsl/v1"
 
-	"projectwaldo.module/greymatter:globals"
+	"foobar_1.module/greymatter:globals"
 )
-
 
 
 Kiwi2: gsl.#Service & {
@@ -18,25 +17,24 @@ Kiwi2: gsl.#Service & {
 	version:       "v1.0.0"
 	description:   "EDIT ME"
 	
-	api_endpoint:              "http://\(context.globals.edge_host)/services/projectwaldo/\(name)/"
-	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/projectwaldo/\(name)/"
+	api_endpoint:              "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
+	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
 	business_impact:           "low"
 	owner: ""
 	capability: ""
 	
 	// Kiwi2 -> ingress to your container
 	ingress: {
-		"kiwi2": {
+		(name): {
 			gsl.#HTTPListener
 			
 			
 			
+
 			routes: {
 				"/": {
 					upstreams: {
 						"local": {
-							
-							
 							instances: [
 								{
 									host: "127.0.0.1"
@@ -47,6 +45,7 @@ Kiwi2: gsl.#Service & {
 					}
 				}
 			}
+			
 		}
 	}
 
@@ -54,9 +53,12 @@ Kiwi2: gsl.#Service & {
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
 	edge: {
-		edge_name: "edge-projectwaldo"
-		edge_ingress: "edge-projectwaldo"
-		routes: "/services/projectwaldo/kiwi2": upstreams: "\(name)": gsl.#DefaultUpstream
+		edge_name: "edge-foobar-1"
+		routes: "/services/foobar-1/kiwi2": upstreams: (name): {
+			gsl.#DefaultUpstream
+			
+		}
+		
 	}
 }
 

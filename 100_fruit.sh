@@ -9,7 +9,7 @@
 for i in {1..2}
 do
 #echo "kiwi${i}"
-~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "kiwi${i}"
+~/greymatter453 init service --insecure --type=http --dir greymatter/foobar_1 --port=9090 --namespace=foobar-1 "kiwi${i}"
 #~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "peach${i}"
 #~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "orange${i}"
 #~/greymatter init service --insecure --type=http --dir greymatter/projectwaldo --port=9090 --package=projectwaldo "fig${i}"

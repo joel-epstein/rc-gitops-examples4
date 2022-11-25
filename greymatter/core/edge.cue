@@ -3,12 +3,12 @@
 // repository in the mesh. This edge would be separate from the default
 // greymatter edge that is deployed via enterprise-level configuration in
 // the gitops-core git repository.
-package projectwaldo
+package foobar_1
 
 import (
 	gsl "greymatter.io/gsl/v1"
 
-	"projectwaldo.module/greymatter:globals"
+	"foobar_1.module/greymatter:globals"
 )
 
 Edge: gsl.#Service & {
@@ -16,26 +16,27 @@ Edge: gsl.#Service & {
 	// to your service definitions.
 	context: Edge.#NewContext & globals
 
-	name:              "edge-projectwaldo"
-	display_name:      "Edge Projectwaldo"
+	name:              "edge-foobar-1"
+	display_name:      "Foobar 1 Edge"
 	version:           "v1.7.4"
-	description:       "EDIT ME: Edge ingress for projectwaldo"
-	api_endpoint:              "http://\(context.globals.edge_host)/services/projectwaldo/\(name)/"
-	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/projectwaldo/\(name)/"
+	description:       "Edge ingress for foobar-1"
+	api_endpoint:              "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
+	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
 	business_impact:           "high"
 	owner: ""
 	capability: ""
 	
 	ingress: {
 		// Edge -> HTTP ingress to your container
-		"edge-projectwaldo": {
+		(name): {
 			gsl.#HTTPListener
 			
 			port: 10809
-			routes: "/": upstreams: "\(name)": gsl.#DefaultUpstream
-			
+				
+
+			routes: "/": upstreams: (name): gsl.#DefaultUpstream
 		}
 	}
 }
 
-exports: "edge-projectwaldo": Edge
+exports: "edge-foobar-1": Edge

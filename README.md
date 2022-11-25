@@ -1,5 +1,5 @@
 
-# Projectwaldo
+# Foobar-1
 
 A greymatter.io tenant GitOps repository using CUE! :rocket:
 
@@ -12,12 +12,12 @@ A greymatter.io tenant GitOps repository using CUE! :rocket:
 
 Let's get to know the in's and out's of a greymatter.io project!
 
-### CUE
+### Greymatter Specification Language
 
-We write mesh configurations in [CUE](https://cuelang.org/), a fantastic data
-validation language. It's quite cutting edge, but not hard to learn. We put
-together a quick crash course you can read in TUTORIAL.md. You can also
-checkout the official [CUE documentation](https://cuelang.org/docs/), [cuetorials](https://cuetorials.com/),
+Service configurations are structured in the Greymatter Specification Language (GSL) format.
+You write GSL using [CUE](https://cuelang.org/), a powerful data
+configuration language. Since it's quite cutting edge, we put together a quick crash course you can 
+read in TUTORIAL.md. We also recommend the official [CUE documentation](https://cuelang.org/docs/), [cuetorials](https://cuetorials.com/),
 and the [CUE playground](https://cuelang.org/play/#cue@export@cue).
 
 ### Creating the example Grocery Store Project
@@ -30,12 +30,18 @@ greymatter init --dir store --example grocerystore
 
 ### Creating a project scaffold
 
-`greymatter init` also supports creating an empty project. This includes an edge node,
-a globals file, a greymatter.io sync manifest, and a prefetched greymattter.io v1.8 dependencies.
+`greymatter init` can be used to create a tenant project. The command will scaffold out the 
+directory structure, download the GSL CUE library, generate an edge node manifest and configuration, 
+a globals file, and a greymatter sync manifest.
+
 Try running the following:
 ```
 greymatter init --dir project myproject
 ```
+
+It is important to note that a project should correspond to the namespace of the services contained
+within the project. When selecting the name of the project, it should match the namespace. However, the
+project folder itself, does not matter.
 
 ## Project Layout
 
@@ -46,10 +52,9 @@ What comes in a greymatter project?
 are logical groupings of packages and enable certain features like imports.
 * `cue.mod/pkg`: A package that holds all greymatter and Envoy config
 CUE schemas as well as other CUE fetched dependencies.
-* `greymatter`: The target directory for your project CUE. All greymatter service configurations 
-will live in this folder regardless of the package.
-* `greymatter/core`: This directory hosts greymatter specific functionality such as edge nodes, bridges,
-and other various core features.
+* `greymatter`: The directory storing all your GSL configuration.
+* `greymatter/core`: This directory stores GSL configuration for specific greymatter products,
+the application edge node.
 * `./greymatter/globals.cue`: A CUE file in `package globals` that contains
 defaults, overrides, and user generated values. This is the entry point to your configuration pipeline.
 * `k8s`: A folder to host Kubernetes manifests.
@@ -95,7 +100,7 @@ kubectl apply -f ./k8s/sync.yaml -n $MY_NAMESPACE # this deploys the greymatter.
 Once you've deployed your manifests retrieve the Kubernetes ingress service for your 
 project's edge node:
 ```bash
-kubectl get svc edge-projectwaldo -n $MY_NAMESPACE
+kubectl get svc edge-foobar-1 -n $MY_NAMESPACE
 ```
 
 Retrieve the hostname entry and port and populate the value in `greymatter/globals.cue`: `defaults.edge.endpoint`.
@@ -105,8 +110,8 @@ Commit the change, push to your repo, and happy requesting!
 
 ### Deployment
 
-greymatter.io supports GitOps as a first-class function. Deploying new services is as easy 
-applying a manifest and committing!
+greymatter.io utilizes GitOps to store and push configurations. Deploying new services is as easy 
+applying a manifest and committing its associated GSL configuration.
 
 Given you have an existing manifest for your service, first deploy it into an operator watched namespace
 with the proper sidecar annotations in the Kubernetes object `metadata` field:
@@ -122,8 +127,8 @@ metadata:
 
 # Container spec metadata 
 # This is required to associate your service with a data-plane group in greymatter.
-# Note that the value provided on this annotation should be 
-# the key defined in your services proxy object.
+# Note that the value provided on this annotation should match 
+# the name key defined in your GSL service construct.
 metadata:
   labels:
     greymatter.io/cluster: my_new_service
@@ -133,7 +138,9 @@ Then generate your greymatter.io configurations with the CLI:
 ```bash
 greymatter init service --type=http --dir=greymatter/myproject --port 8080 --package=myproject myrestapi
 ```
-Once that is generated add the service to the top file EXPORTS.cue.
+
+Note that the package flag must match the project name you used during the project creation.
+
 After doing so, make a commit to your remote repository that you pointed the deployed sync service to and push! 
 After a few moments your service should show up in the greymatter.io intelligence 
 dashboard and go green once the sidecar can reach the upstream service.
@@ -147,7 +154,7 @@ We recommend using Kubernetes secrets and volume mounts to independently manage 
 #### Securing Your Gateway
 A hook is provided for setting up TLS on the given edge gateway for your project. Please create a secret at the following location:
 ```bash
-kubectl create secret generic greymatter-projectwaldo-edge-certs \
+kubectl create secret generic greymatter-foobar-1-edge-certs \
 	--from-file=ca.crt=./ca.crt \
 	--from-file=server.crt=./server.crt \
 	--from-file=server.key=./server.key \
@@ -164,7 +171,7 @@ __Key:__ `/etc/proxy/tls/sidecar/server.key`
 > Note: The path + file name is important and should be exactly what is outlined above.
  
 greymatter.io mesh configurations have been setup for your service to look at these paths. 
-It is up to you to get them there! Following the pattern defined in the `k8s/manifests.yaml` edge-projectwaldo Deployment 
+It is up to you to get them there! Following the pattern defined in the `k8s/manifests.yaml` edge-foobar-1 Deployment 
 is a great way to get your certs mounted and available to the greymatter.io data plane.
 
 > Note: your enterprise will need to make sure the core mesh configurations support volume mounted certificates
@@ -184,15 +191,22 @@ StatefulSet/Deployment. *Hint: they should be in the k8s object metadata.*
 
 ####  Services not showing up in the greymatter.io dashboard?
 
+- Make sure you filled in the `mesh.name` field in globals.cue.
 - Make sure the `sync.yaml` manifest is pointed at the correct git remote repository. This can be found in the co-located ConfigMap inside the file.
-- Verify your generated service as a `#catalog_entry` with proper keys/names.
 - Make sure the greymatter.io sync has no reported errors inside the pod logs.
-- Verify you have added your services into the `EXPORTS.cue` configuration arrays.
+- Do not overwrite the service_id unless you absolutely know what you are doing. 
+
+#### Non-fast Forward Sync Error
+
+ - You cannot push a non-fast forward commit (i.e. force push a commit). To fix the error, you must delete the statefulset associated with sync.
 
 #### CUE is not evaluating?
 
-- Make sure your intermediates.cue/inputs.cue package matches your service.cue's package. If they do not, then CUE will not evaluate them together.
+- Run `greymatter sync --dry-run` from the project root to collect errors before pushing.
 - Verify all imports/package names are correct.
+- Check that you didn't accidentally assign a string to an integer (like for ports).
+- Remember, you cannot reassign fields.
+- Certain special characters, like `-`, must be quoted if used within a CUE struct key.
 
 #### Still stuck?
 
