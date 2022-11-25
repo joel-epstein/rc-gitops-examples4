@@ -5,7 +5,7 @@ import (
 )
 
 globals: gsl.#DefaultContext & {
-	edge_host: "51.142.216.63:10810"
+	edge_host: "51.142.216.63:10809"
 
 	// Please contact your mesh administrators as to what
 	// values must be set per your mesh deployment.

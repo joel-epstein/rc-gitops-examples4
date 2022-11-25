@@ -31,7 +31,7 @@ Edge: gsl.#Service & {
 		(name): {
 			gsl.#HTTPListener
 			
-			port: 10810
+			port: 10809
 				
 
 			routes: "/": upstreams: (name): gsl.#DefaultUpstream
