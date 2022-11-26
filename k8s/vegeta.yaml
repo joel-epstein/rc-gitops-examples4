@@ -24,7 +24,7 @@ spec:
           image: greymatter.jfrog.io/internal-oci/vegeta:joel
           env:
             - name: TARGET_FQDN
-              value: edge-projectwaldo.foobar-1.svc.cluster.local:10809
+              value: edge-foobar-1.foobar-1.svc.cluster.local:10809
             - name: TARGET_OBJECT
               value: kiwi
             - name: COUNT
