@@ -49,8 +49,6 @@ Peach_2: gsl.#Service & {
 		}
 	}
 
-
-	
 	// Edge config for the Peach-2 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
@@ -60,8 +58,8 @@ Peach_2: gsl.#Service & {
 			gsl.#DefaultUpstream
 			
 		}
+		
 	}
-	
 }
 
 exports: "peach-2": Peach_2
