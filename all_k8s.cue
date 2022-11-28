@@ -43,7 +43,7 @@ everything_yaml: yaml.MarshalStream(everything)
 all_fruit: [for i in list.Range(1,number+1,1) {
 
    _fruit_template & {
-     _name:"\(_namespace2fruit[namespace])\(i)"
+     _name:"\(_namespace2fruit[namespace])-\(i)"
      _namespace: namespace
   }
 

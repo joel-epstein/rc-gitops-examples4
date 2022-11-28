@@ -7,13 +7,13 @@ import (
 )
 
 
-Peach2: gsl.#Service & {
+Peach_2: gsl.#Service & {
 	// A context provides global information from globals.cue
 	// to your service definitions.
-	context: Peach2.#NewContext & globals
+	context: Peach_2.#NewContext & globals
 
-	name:          "peach2"
-	display_name:  "Peach2"
+	name:          "peach-2"
+	display_name:  "Peach 2"
 	version:       "v1.0.0"
 	description:   "EDIT ME"
 	
@@ -23,7 +23,7 @@ Peach2: gsl.#Service & {
 	owner: ""
 	capability: ""
 	
-	// Peach2 -> ingress to your container
+	// Peach-2 -> ingress to your container
 	ingress: {
 		(name): {
 			gsl.#HTTPListener
@@ -49,17 +49,19 @@ Peach2: gsl.#Service & {
 		}
 	}
 
-	// Edge config for the Peach2 service.
+
+	
+	// Edge config for the Peach-2 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
 	edge: {
 		edge_name: "edge-foobar-2"
-		routes: "/services/foobar-2/peach2": upstreams: (name): {
+		routes: "/services/foobar-2/peach-2": upstreams: (name): {
 			gsl.#DefaultUpstream
 			
 		}
-		
 	}
+	
 }
 
-exports: "peach2": Peach2
+exports: "peach-2": Peach_2
