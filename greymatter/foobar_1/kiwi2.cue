@@ -49,6 +49,8 @@ Kiwi2: gsl.#Service & {
 		}
 	}
 
+
+	
 	// Edge config for the Kiwi2 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
@@ -58,8 +60,8 @@ Kiwi2: gsl.#Service & {
 			gsl.#DefaultUpstream
 			
 		}
-		
 	}
+	
 }
 
 exports: "kiwi2": Kiwi2

@@ -15,7 +15,7 @@ Kiwi1: gsl.#Service & {
 	name:          "kiwi1"
 	display_name:  "Kiwi1"
 	version:       "v1.0.0"
-	description:   "GREENLIGHT"
+	description:   "EDIT ME"
 	
 	api_endpoint:              "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
 	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
@@ -49,6 +49,8 @@ Kiwi1: gsl.#Service & {
 		}
 	}
 
+
+	
 	// Edge config for the Kiwi1 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
@@ -58,8 +60,8 @@ Kiwi1: gsl.#Service & {
 			gsl.#DefaultUpstream
 			
 		}
-		
 	}
+	
 }
 
 exports: "kiwi1": Kiwi1
