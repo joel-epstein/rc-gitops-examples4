@@ -15,7 +15,7 @@ Kiwi1: gsl.#Service & {
 	name:          "kiwi1"
 	display_name:  "Kiwi1"
 	version:       "v1.0.0"
-	description:   "REDLIGHT"
+	description:   "GREENLIGHT"
 	
 	api_endpoint:              "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
 	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/foobar-1/\(name)/"
