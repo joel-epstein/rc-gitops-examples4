@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: sidecar
-          image: greymatter.jfrog.io/oci/greymatter-proxy:1.8.0-ubi8.6-2022-11-22
+          # image: greymatter.jfrog.io/oci/greymatter-proxy:1.8.0-ubi8.6-2022-11-22
+          image: greymatter.jfrog.io/internal-oci/gm-proxy:eia
           imagePullPolicy: Always
           ports:
           - containerPort: 10809
