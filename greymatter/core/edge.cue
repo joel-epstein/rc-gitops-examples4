@@ -39,6 +39,6 @@ Edge: gsl.#Service & {
 			routes: "/": upstreams: (name): gsl.#DefaultUpstream
 		}
 	}
-}
+} 
 
 exports: "edge-foobar-2": Edge
