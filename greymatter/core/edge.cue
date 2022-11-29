@@ -22,6 +22,8 @@ Edge: gsl.#Service & {
 	description:       "Edge ingress for foobar-2"
 	// api_endpoint:              "http://\(context.globals.edge_host)/services/foobar-2/\(name)/"
 	// api_spec_endpoint:         "http://\(context.globals.edge_host)/services/foobar-2/\(name)/"
+	api_endpoint:              ""
+	api_spec_endpoint:         ""
 	business_impact:           "high"
 	owner: ""
 	capability: ""
