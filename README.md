@@ -136,10 +136,10 @@ metadata:
 
 Then generate your greymatter.io configurations with the CLI:
 ```bash
-greymatter init service --type=http --dir=greymatter/myproject --port 8080 --package=myproject myrestapi
+greymatter init service --type=http --dir=greymatter/myproject --port 8080 --namespace=myproject myrestapi
 ```
 
-Note that the package flag must match the project name you used during the project creation.
+Note that the namespace flag must match the project name you used during the project creation.
 
 After doing so, make a commit to your remote repository that you pointed the deployed sync service to and push! 
 After a few moments your service should show up in the greymatter.io intelligence 

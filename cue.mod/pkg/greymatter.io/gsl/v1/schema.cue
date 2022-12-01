@@ -9,6 +9,7 @@ import (
 #Exports: [ServiceName=_]: #Service
 #GlobalContext: {
 	edge_host: string
+	namespace: string
 
 	mesh: {
 		name:                    string
@@ -57,7 +58,6 @@ import (
 	use_remote_address?:    bool
 	tracing_config?:        api.#TracingConfig
 	access_loggers?:        api.#AccessLoggers
-
 	http_protocol_options?:  api.#HTTPProtocolOptions
 	http2_protocol_options?: api.#HTTP2ProtocolOptions
 	domain_name:             *"*" | _
@@ -84,7 +84,13 @@ import (
 	#UpstreamSecretSchema
 	zone_key: #DEFAULT_ZONE
 	name:     string
+
+	// NOTE(alec): one of these is required but for some reason
+	// the cue disjunction is failing to correctly resolve so for 
+	// right now we're just making these optional values.
+	namespace?: string
 	instances?: [...api.#Instance]
+
 	lb_policy?:               string
 	ring_hash_lb_config?:     api.#RingHashLbConfig
 	original_dst_lb_config?:  api.#OriginalDstLbConfig

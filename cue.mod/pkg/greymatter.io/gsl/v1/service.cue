@@ -12,6 +12,7 @@ package v1
 
 	zone_key:                  #DEFAULT_ZONE
 	name:                      string
+	namespace:				   string | *context.globals.namespace
 	mesh_id:                   string | *context.globals.mesh.name
 	service_id:                name
 	api_endpoint:              string
@@ -48,7 +49,6 @@ package v1
 	// Every service must have a ingress listener named itself
 	ingress: "\(service.name)": self = (#HTTPListener | #TCPListener) & {
 		port: *context.globals.sidecar.default_ingress_port | _
-
 		metrics_options: {
 			metrics_port: context.globals.sidecar.metrics_port
 			if self.protocol == "http_auto" {
@@ -56,7 +56,6 @@ package v1
 					redis_connection_string: "redis://127.0.0.1:\(context.globals.sidecar.healthcheck_port)"
 					push_interval_seconds:   10
 				}
-
 			}
 		}
 
@@ -85,15 +84,14 @@ package v1
 	egress: "health-checks": #TCPListener & {
 		port: context.globals.sidecar.healthcheck_port
 		upstream: {
+			namespace: *"" | _
+			name: *"greymatter-datastore" | _
 			if health_options.tls != _|_ {
 				health_options.tls
 			}
-
 			if health_options.spire != _|_ {
 				health_options.spire
 			}
-
-			name: "greymatter-datastore"
 		}
 	}
 }
