@@ -527,7 +527,7 @@ _#lookupFilters: {
 	policy:   #options
 }
 #OAuthFilter: {
-	#options: http.#OAuthFilter
+	#options: http.#OauthConfig
 	oauth:    #options
 }
 

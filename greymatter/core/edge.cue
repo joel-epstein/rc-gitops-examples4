@@ -24,7 +24,7 @@ Edge: gsl.#Service & {
 	api_endpoint:              "N/A"
 	api_spec_endpoint:         "N/A"
 	business_impact:           "high"
-	owner: ""
+	owner: "Foobar 1"
 	capability: ""
 	
 	ingress: {
@@ -35,7 +35,9 @@ Edge: gsl.#Service & {
 			port: 10809
 				
 
-			routes: "/": upstreams: (name): { namespace: context.globals.namespace }
+			routes: "/": upstreams: (name): { 
+				namespace: context.globals.namespace 
+			}
 		}
 	}
 }

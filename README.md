@@ -5,7 +5,7 @@ A greymatter.io tenant GitOps repository using CUE! :rocket:
 
 ## Prerequisites
 
-* `greymatter` CLI v4.5+
+* `greymatter` CLI v4.5.7+
 * [CUE](https://cuelang.org/docs/install/)
 
 ## Getting Started
