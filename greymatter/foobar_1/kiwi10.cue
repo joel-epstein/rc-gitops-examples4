@@ -7,14 +7,14 @@ import (
 )
 
 
-Kiwi1: gsl.#Service & {
+Kiwi10: gsl.#Service & {
 	// A context provides global information from globals.cue
 	// to your service definitions.
-	context: Kiwi1.#NewContext & globals
+	context: Kiwi10.#NewContext & globals
 
 	// name must follow the pattern namespace/name
-	name:          "kiwi1"
-	display_name:  "Foobar 1 Kiwi1"
+	name:          "kiwi10"
+	display_name:  "Foobar 1 Kiwi10"
 	version:       "v1.0.0"
 	description:   "EDIT ME"
 	api_endpoint:              "http://\(context.globals.edge_host)/services/\(context.globals.namespace)/\(name)/"
@@ -23,7 +23,7 @@ Kiwi1: gsl.#Service & {
 	owner: "Foobar 1"
 	capability: ""
 	
-	// Kiwi1 -> ingress to your container
+	// Kiwi10 -> ingress to your container
 	ingress: {
 		(name): {
 			gsl.#HTTPListener
@@ -50,7 +50,7 @@ Kiwi1: gsl.#Service & {
 
 
 	
-	// Edge config for the Kiwi1 service.
+	// Edge config for the Kiwi10 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
 	edge: {
@@ -63,4 +63,4 @@ Kiwi1: gsl.#Service & {
 	
 }
 
-exports: "kiwi1": Kiwi1
+exports: "kiwi10": Kiwi10

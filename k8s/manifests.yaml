@@ -4,7 +4,7 @@ metadata:
   name: edge
   namespace: foobar-1
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       greymatter.io/cluster: foobar-1-edge

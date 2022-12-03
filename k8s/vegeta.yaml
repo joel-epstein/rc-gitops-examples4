@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: vegeta
-  replicas: 1
+  replicas: 5
   template:
     metadata:
       labels:
@@ -24,13 +24,13 @@ spec:
           image: greymatter.jfrog.io/internal-oci/vegeta:joel
           env:
             - name: TARGET_FQDN
-              value: edge-foobar-1.foobar-1.svc.cluster.local:10809
+              value: 20.26.144.71:10809
             - name: TARGET_OBJECT
               value: kiwi
             - name: COUNT
               value: "2"
             - name: RATE
-              value: "5"
+              value: "50"
             - name: DURATION
               value: 0s
             - name: BLOCK
