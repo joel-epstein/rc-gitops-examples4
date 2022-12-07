@@ -16,16 +16,15 @@ Edge: gsl.#Service & {
 	// to your service definitions.
 	context: Edge.#NewContext & globals
 
-	name:              "edge-foobar-2"
+	// name must follow the pattern namespace/name
+	name:              "edge"
 	display_name:      "Foobar 2 Edge"
-	version:           "v1.7.4"
+	version:           "v1.8.1"
 	description:       "Edge ingress for foobar-2"
-	// api_endpoint:              "http://\(context.globals.edge_host)/services/foobar-2/\(name)/"
-	// api_spec_endpoint:         "http://\(context.globals.edge_host)/services/foobar-2/\(name)/"
-	api_endpoint:              ""
-	api_spec_endpoint:         ""
+	api_endpoint:              "N/A"
+	api_spec_endpoint:         "N/A"
 	business_impact:           "high"
-	owner: ""
+	owner: "Foobar 2"
 	capability: ""
 	
 	ingress: {
@@ -36,9 +35,11 @@ Edge: gsl.#Service & {
 			port: 10809
 				
 
-			routes: "/": upstreams: (name): gsl.#DefaultUpstream
+			routes: "/": upstreams: (name): { 
+				namespace: context.globals.namespace 
+			}
 		}
 	}
-} 
+}
 
 exports: "edge-foobar-2": Edge

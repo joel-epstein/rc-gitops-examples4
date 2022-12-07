@@ -15,7 +15,6 @@ import (
 
 	secret: {
 		ecdh_curves: *["X25519:P-256:P-521:P-384"] | [...string]
-
 		secret_validation_name: *"spiffe://\(#context.spire.trust_domain)" | _
 		// // self 
 		secret_name: *"spiffe://\(#context.spire.trust_domain)/\(#context.mesh.operator_namespace).\(#context.mesh.name).\(#context.service_name)" | _
@@ -62,6 +61,9 @@ import (
 	force_https: true
 	ssl_config:  #ListenerSSLConfig & {
 		protocols:      *["TLS_AUTO"] | _
+		// NOTE(alec): this is supposed to be optional but the disjunction 
+		// in the health option breaks if we don't provide a value here.
+		trust_file: "" 
 		cert_key_pairs: *[
 				{
 				certificate_path: *"/etc/proxy/tls/sidecar/server.crt" | _
@@ -125,7 +127,6 @@ import (
 	filters: [...]
 	_defaultfilters: [...]
 	_allfilters: filters + _defaultfilters + [{tcp_proxy: tcp_options}]
-
 	_unique: {
 		for filter in _allfilters for name, v in filter {
 			"\(name)": v

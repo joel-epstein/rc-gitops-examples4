@@ -1,29 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: edge-foobar-2
+  name: edge
   namespace: foobar-2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      greymatter.io/cluster: edge-foobar-2
+      greymatter.io/cluster: foobar-2-edge
   template:
     metadata:
       labels:
-        greymatter.io/cluster: edge-foobar-2
+        greymatter.io/cluster: foobar-2-edge
     spec:
       containers:
         - name: sidecar
-          # image: greymatter.jfrog.io/oci/greymatter-proxy:1.8.0-ubi8.6-2022-11-22
-          image: greymatter.jfrog.io/internal-oci/gm-proxy:eia
+          image: greymatter.jfrog.io/release-oci/greymatter-proxy:1.8.1
           imagePullPolicy: Always
           ports:
           - containerPort: 10809
             name: proxy
           env:
             - name: XDS_CLUSTER
-              value: edge-foobar-2
+              value: foobar-2-edge
             - name: ENVOY_ADMIN_LOG_PATH
               value: /dev/stdout
             - name: PROXY_DYNAMIC
@@ -47,7 +46,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: edge-foobar-2
+  name: edge
   namespace: foobar-2
 spec:
   ports:
@@ -56,6 +55,6 @@ spec:
     protocol: TCP
     targetPort: 10809
   selector:
-    greymatter.io/cluster: edge-foobar-2
+    greymatter.io/cluster: foobar-2-edge
   type: LoadBalancer
 

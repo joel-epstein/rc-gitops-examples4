@@ -5,8 +5,9 @@ import (
 )
 
 globals: gsl.#DefaultContext & {
-	edge_host: "20.26.60.231:10809"
-
+	edge_host: ""
+	namespace: "foobar-2"
+	
 	// Please contact your mesh administrators as to what
 	// values must be set per your mesh deployment.
 	mesh: {

@@ -6,8 +6,6 @@ package v1
 	allow_connect: true
 }
 
-#DefaultUpstream: {...}
-
 #DefaultRBAC: {
 	rules: {
 		action: "ALLOW"
@@ -28,7 +26,7 @@ package v1
 	}
 }
 
-#DefaultOPAUpstream: #DefaultUpstream & {
+#DefaultOPAUpstream: {
 	http2_protocol_options: #DefaultHTTP2Options
 }
 
