@@ -24,11 +24,11 @@ spec:
           image: greymatter.jfrog.io/internal-oci/vegeta:joel
           env:
             - name: TARGET_FQDN
-              value: 20.26.144.71:10809
+              value: edge.foobar-1.svc.cluster.local:10809
             - name: TARGET_OBJECT
               value: kiwi
             - name: COUNT
-              value: "2"
+              value: "50"
             - name: RATE
               value: "50"
             - name: DURATION
@@ -36,3 +36,5 @@ spec:
             - name: BLOCK
               value: "false"
 
+
+jq -ncM '{"method":"GET", "url": "http://edge.greymatter.svc.cluster.local:10808/services/catalog/summary?include_health_groups=true"}' |   vegeta attack -rate=1000/s -format=json -duration=5s -timeout=0 | tee results.bin | vegeta report
