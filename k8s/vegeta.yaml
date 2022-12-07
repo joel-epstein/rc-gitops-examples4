@@ -36,5 +36,3 @@ spec:
             - name: BLOCK
               value: "false"
 
-
-jq -ncM '{"method":"GET", "url": "http://edge.greymatter.svc.cluster.local:10808/services/catalog/summary?include_health_groups=true"}' |   vegeta attack -rate=1000/s -format=json -duration=5s -timeout=0 | tee results.bin | vegeta report
