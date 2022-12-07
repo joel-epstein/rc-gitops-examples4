@@ -63,4 +63,4 @@ Peach8: gsl.#Service & {
 	
 }
 
-// exports: "peach8": Peach8
+exports: "peach8": Peach8
