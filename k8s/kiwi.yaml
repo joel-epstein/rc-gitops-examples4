@@ -14,7 +14,6 @@ spec:
     metadata:
       labels:
         app: kiwi
-        # special: loadtest
     spec:
       securityContext:
         sysctls:
@@ -23,12 +22,5 @@ spec:
       containers:
         - name: kiwi
           image: greymatter.jfrog.io/internal-oci/fake-service:v0.24.2
-      # topologySpreadConstraints:
-      #   - maxSkew: 1
-      #     topologyKey: kubernetes.io/hostname
-      #     whenUnsatisfiable: ScheduleAnyway
-      #     labelSelector:
-      #       matchLabels:
-      #         special: loadtest
       terminationGracePeriodSeconds: 0
 
