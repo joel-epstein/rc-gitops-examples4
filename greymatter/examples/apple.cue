@@ -16,7 +16,7 @@ Apple: gsl.#Service & {
 	name:          "apple"
 	display_name:  "Examples Apple"
 	version:       "v1.0.0"
-	description:   "EDIT ME FOO"
+	description:   "EDIT ME"
 	api_endpoint:              "http://\(context.globals.edge_host)/services/\(context.globals.namespace)/\(name)/"
 	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/\(context.globals.namespace)/\(name)/"
 	
