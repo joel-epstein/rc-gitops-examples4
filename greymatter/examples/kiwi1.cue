@@ -6,38 +6,39 @@ import (
 	"examples.module/greymatter:globals"
 )
 
-
 Kiwi1: gsl.#Service & {
 	// A context provides global information from globals.cue
 	// to your service definitions.
 	context: Kiwi1.#NewContext & globals
 
 	// name must follow the pattern namespace/name
-	name:          "kiwi1"
-	display_name:  "Examples Kiwi1"
-	version:       "v1.0.0"
-	description:   "EDIT ME"
-	api_endpoint:              "http://\(context.globals.edge_host)/services/\(context.globals.namespace)/\(name)/"
-	api_spec_endpoint:         "http://\(context.globals.edge_host)/services/\(context.globals.namespace)/\(name)/"
-	
-	business_impact:           "low"
-	owner: "Examples"
-	capability: ""
-	
+	name:              "kiwi1"
+	display_name:      "Examples Kiwi1"
+	version:           "v1.0.0"
+	description:       "EDIT ME"
+	api_endpoint:      "http://\(context.globals.edge_host)/services/\(context.globals.namespace)/\(name)/"
+	api_spec_endpoint: "http://\(context.globals.edge_host)/services/\(context.globals.namespace)/\(name)/"
+
+	business_impact: "low"
+	owner:           "Examples"
+	capability:      ""
+	health_options: {
+		tls: gsl.#MTLSUpstream
+	}
+
 	// Kiwi1 -> ingress to your container
 	ingress: {
 		(name): {
 			gsl.#HTTPListener
-			
-			
-			
+			gsl.#MTLSListener
+
 			routes: {
 				"/": {
-					
+
 					upstreams: {
 						"local": {
 							gsl.#Upstream
-							
+
 							instances: [
 								{
 									host: "127.0.0.1"
@@ -51,8 +52,6 @@ Kiwi1: gsl.#Service & {
 		}
 	}
 
-
-	
 	// Edge config for the Kiwi1 service.
 	// These configs are REQUIRED for your service to be accessible
 	// outside your cluster/mesh.
@@ -63,11 +62,10 @@ Kiwi1: gsl.#Service & {
 			upstreams: (name): {
 				gsl.#Upstream
 				namespace: context.globals.namespace
-				
 			}
 		}
 	}
-	
+
 }
 
 exports: "kiwi1": Kiwi1
