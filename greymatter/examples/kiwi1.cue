@@ -22,6 +22,12 @@ Kiwi1: gsl.#Service & {
 	business_impact: "low"
 	owner:           "Examples"
 	capability:      ""
+	external_links: [{
+		title: "Kiwifruit"
+		url:   "https://en.wikipedia.org/wiki/Kiwifruit"
+	},
+
+	]
 	health_options: {
 		tls: gsl.#MTLSUpstream
 	}
